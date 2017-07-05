@@ -1,5 +1,11 @@
 # Changelog
 
+### v1.5.1
+- Possibility to show the password in the login
+- Search with animation
+- Login with animation
+- Fix bugs
+
 ### v1.5.0
 - Possibility to show the password in the login
 - Search with animation

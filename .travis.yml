@@ -17,6 +17,12 @@ jobs:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
     script: ./gradlew assembleDebug
 
+      - stage: build
+        jdk: oraclejdk8
+        before_cache:
+        - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+        script: ./gradlew assembleRelease
+
 before_install:
   - chmod +x gradlew
 
