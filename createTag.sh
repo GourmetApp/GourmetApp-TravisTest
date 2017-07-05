@@ -7,6 +7,11 @@ do
   changelog=$changelog$line
 done < "CHANGELOG.md"
 
+echo "------"
+echo "Travis alias:"
+echo $TRAVIS_ALIAS_KEY
+echo "------"
+
 # Get the last changes and version
 changelog=$(echo $changelog | cut -d"#" -f 5)
 version=$(echo $changelog | cut -d"-" -f 1)
