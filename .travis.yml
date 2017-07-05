@@ -11,11 +11,32 @@ android:
 
 jobs:
   include:
+
+  - stage: debug
+    jdk: oraclejdk8
+    before_cache:
+      - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+    script: ./gradlew assembleRelease
+
+  - stage: test
+    jdk: oraclejdk8
+    script: ./gradlew test
+
   - stage: deploy
     jdk: oraclejdk8
     before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
     script: ./gradlew assembleRelease
+    deploy:
+      provider: releases
+      api_key:
+        secure: uyQlrazR7dhsFX3QxHS28jw6vcdgRKLmx0O753YJ2RwPcAf/5tXzc08Fn6qc5q3VNYijQJH0JvIIKagA9zwIvKe1VJyylDiZ46LXymcHMCihI1tsFdlp60nE4IJQtrJqtHcwBWxc5gYulWnul53gb2L8bxG7Zvf4gp9XZRGqaQgY8ae2MVLqFvA4l+SNU6Z8Qnu4UMs5ycRpncrom9oNoM7Aus13n6G2gAMy4TaPr+sAX2WMA83hpiNvBO/0VCEMxALRjNOJIFtIIy6uJgbQKaBRwSHmHmZyuNpU9uMgqck+TidJnVvmw9IGqfgebX1wX7kvbt+PpjbjDjistJSTsvh3m3q1ZWI8tFpFDV7c6FRSRs5jFXR8IOHZvtJBiF78Zd7KUJgR+Lo1J6AropRXB8aAcNVObC6/2ED9Z9weMfHdGd7vsZg5gdt6zM6rAAPADShDotNAPzfdKQ8PQX6K4c/kWsXmQ/MlD5hR39+etC9I1sOKrO0puqKNmeGIWAHzO4zbtVqxF2OQUBjBBBivxexFQLzPw1zJoq1CV9CsUjoUEG+/0APznMzIPX/ABjyLnBcKOwG1SBNMFPfNTDNa1YxNCWbaW6kI1iyRQWiFJr6l0aqCpLxMsSqHfSWAhgBj3tbb2XUPhNGzJ06rqZCD1tpwj2fcFyvRAtgPEWuFfrU=
+      file: app/build/outputs/apk/GourmetApp-v*.apk
+      file_glob: "true"
+      skip_cleanup: true
+      on:
+        repo: GourmetApp/GourmetApp-TravisTest
+        tags: true
 
 before_install:
   - chmod +x gradlew
@@ -32,14 +53,3 @@ cache:
   - $HOME/.gradle
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-
-deploy:
-  provider: releases
-  api_key:
-    secure: uyQlrazR7dhsFX3QxHS28jw6vcdgRKLmx0O753YJ2RwPcAf/5tXzc08Fn6qc5q3VNYijQJH0JvIIKagA9zwIvKe1VJyylDiZ46LXymcHMCihI1tsFdlp60nE4IJQtrJqtHcwBWxc5gYulWnul53gb2L8bxG7Zvf4gp9XZRGqaQgY8ae2MVLqFvA4l+SNU6Z8Qnu4UMs5ycRpncrom9oNoM7Aus13n6G2gAMy4TaPr+sAX2WMA83hpiNvBO/0VCEMxALRjNOJIFtIIy6uJgbQKaBRwSHmHmZyuNpU9uMgqck+TidJnVvmw9IGqfgebX1wX7kvbt+PpjbjDjistJSTsvh3m3q1ZWI8tFpFDV7c6FRSRs5jFXR8IOHZvtJBiF78Zd7KUJgR+Lo1J6AropRXB8aAcNVObC6/2ED9Z9weMfHdGd7vsZg5gdt6zM6rAAPADShDotNAPzfdKQ8PQX6K4c/kWsXmQ/MlD5hR39+etC9I1sOKrO0puqKNmeGIWAHzO4zbtVqxF2OQUBjBBBivxexFQLzPw1zJoq1CV9CsUjoUEG+/0APznMzIPX/ABjyLnBcKOwG1SBNMFPfNTDNa1YxNCWbaW6kI1iyRQWiFJr6l0aqCpLxMsSqHfSWAhgBj3tbb2XUPhNGzJ06rqZCD1tpwj2fcFyvRAtgPEWuFfrU=
-  file: app/build/outputs/apk/GourmetApp-v*.apk
-  file_glob: "true"
-  skip_cleanup: true
-  on:
-    repo: GourmetApp/GourmetApp-TravisTest
-    branch: master
