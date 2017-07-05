@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GourmetApp-TravisTest.iml" filepath="$PROJECT_DIR$/GourmetApp-TravisTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/GourmetApp-android.iml" filepath="$PROJECT_DIR$/GourmetApp-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gourmet/gourmet.iml" filepath="$PROJECT_DIR$/gourmet/gourmet.iml" />
       <module fileurl="file://$PROJECT_DIR$/gourmet/gourmet.iml" filepath="$PROJECT_DIR$/gourmet/gourmet.iml" />
     </modules>
   </component>
